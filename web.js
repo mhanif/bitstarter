@@ -5,8 +5,8 @@ var buf = require('buffer');
 var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
-  var buf1 = new Buffer('testing');
-  response.send(buf.toString(buf1));
+  var buf1 = new Buffer(fs.readFileSync('index.html'));
+  response.send(buf1.toString());
   //response.send(buf.toString(fs.readFileSync('index.html')));
 });
 
