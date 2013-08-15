@@ -1,0 +1,41 @@
+sudo apt-get install -y git-core
+git clone https://github.com/startup-class/setup.git
+./setup/setup.sh
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub
+git clone git@github.com:mhanif/bitstarter.git
+git config --global user.name mhanif
+git config --global user.email hanif66@gmail.com
+cd bitstarter/
+npm install
+git checkout -b develop
+git branch
+git push -u origin develop
+git checkout -b staging
+git branch
+git push -u origin staging
+heroku login
+heroku keys:add
+heroku apps:create mhanif-bitstarter-s-mooc --remote staging-heroku
+heroku apps:create mhanif-bitstarter-mooc --remote production-heroku
+
+# Get in to the develope/staging/master cycle
+
+git checkout develop
+git branch
+emacs -nw index.html
+git commit -am "Updated the index.html contents with new file"
+git push origin develop
+git branch
+git checkout staging
+git merge develop
+git push origin staging
+git push staging-heroku staging:master 
+git checkout master
+git merge staging
+git push production-heroku master:master
+git push origin master
+
+#Now go back to the develop branch
+
+/usr/bin/env node web.js
