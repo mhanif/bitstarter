@@ -39,3 +39,14 @@ git push origin master
 #Now go back to the develop branch
 
 /usr/bin/env node web.js
+
+cd $HOME
+curl https://raw.github.com/startup-class/setup/master/setup.sh | bash
+exit
+git clone https://github.com/startup-class/bitstarter-ssjs-db.git
+cd bitstarter-ssjs-db
+./setup-ssjs.sh
+edit the .env file
+foreman start
+git push heroku master
+heroku config:push
